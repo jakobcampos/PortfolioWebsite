@@ -2,6 +2,10 @@
 import * as THREE from 'three'
 import * as dat from 'lil-gui'
 import gsap from 'gsap'
+import $ from 'jquery';
+// Import OBJLoader
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+
 
 THREE.ColorManagement.enabled = false
 
@@ -35,10 +39,6 @@ const scene = new THREE.Scene()
 /**
  * Objects
  */
-// Texture
-const textureLoader = new THREE.TextureLoader()
-const gradientTexture = textureLoader.load('textures/gradients/5.jpg')
-//gradientTexture.magFilter = THREE.NearestFilter
 
 const materialSphere = new THREE.MeshBasicMaterial({
     color: 0xff8647,
@@ -65,11 +65,66 @@ const materialCylinder = new THREE.MeshBasicMaterial({
     wireframe: true
 })
 
+const materialMotorcycle = new THREE.MeshBasicMaterial({ 
+    opacity: .05,
+    color: 0xff5349, 
+    wireframe: true
+});
+
+const materialPorsche= new THREE.MeshBasicMaterial({ 
+    opacity: .03,
+    color: 0xb18cfe, 
+    wireframe: true
+});
+
+materialCylinder.transparent = true;
+
 const group = new THREE.Group()
 scene.add(group)
 
 // Objects
 const objectsDistance = 15
+
+const objLoader = new OBJLoader();
+
+let modelMotorcycle;
+
+objLoader.load(
+    'models/model.obj',
+    function ( object ) {
+        // Assign the new material
+        object.traverse(function (child) {
+            if (child instanceof THREE.Mesh) {
+                child.material = materialMotorcycle;
+                child.material.transparent = true;
+            }
+        });
+
+        group.add(object);
+
+        object.transparent = true;
+
+        // Scale
+        object.scale.set(.25, .25, .25);
+
+        // Rotation
+        object.rotation.y = Math.PI  + 90;
+
+        // Position
+        object.position.x = 2.5;
+        object.position.y = - objectsDistance * 1 - 1.5;
+
+        modelMotorcycle = object;
+    },
+    function ( xhr ) {
+    // This function is called when the loading process is ongoing
+    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+    },
+    function ( error ) {
+    // This function is called if an error occurs
+    console.error( 'An error happened', error );
+    }
+);
 
 const sphere = new THREE.Mesh(
     new THREE.OctahedronGeometry(.3, 5),
@@ -88,7 +143,7 @@ const octahedron = new THREE.Mesh(
     materialOctahedron
 )
 const cylinder = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.25, 1.25, 3, 8, 1),
+    new THREE.CylinderGeometry(1.25, 1.25, 3, 20, 1),
     materialCylinder
 )
 
@@ -100,7 +155,7 @@ group.add(torus)
 // My Project Object
 group.add(octahedron)
 
-// Contact Me Object
+// Conact Me Object
 group.add(cylinder)
 
 // Sphere Position
@@ -121,8 +176,8 @@ cylinder.position.x = 3
 
 // Object Scroll Position
 torus.position.y = - objectsDistance * 0
-octahedron.position.y = - objectsDistance * 1
-cylinder.position.y = - objectsDistance * 2
+octahedron.position.y = - objectsDistance * 2
+cylinder.position.y = - objectsDistance * 3
 
 //scene.add(mesh1, mesh2, mesh3)
 
@@ -224,12 +279,18 @@ window.addEventListener('mousemove', (event) =>
  */
 const clock = new THREE.Clock()
 let previousTime = 0
+let spikeDirection = 1;
+let maxSpikeSize = 1.25;
+let minSpikeSize = .5;
+const maxDeltaTime = 1 / 60; // Corresponds to 30 FPS
 
-const tick = () =>
-{
-    const elapsedTime = clock.getElapsedTime()
-    const deltaTime = elapsedTime - previousTime
-    previousTime = elapsedTime
+const tick = () => {
+    const elapsedTime = clock.getElapsedTime();
+    let deltaTime = elapsedTime - previousTime;
+    previousTime = elapsedTime;
+
+    // Clamp deltaTime
+    deltaTime = Math.min(deltaTime, maxDeltaTime);
 
     // Animate camera
     camera.position.y = - scrollY / sizes.height * objectsDistance
@@ -244,6 +305,35 @@ const tick = () =>
     {
         mesh.rotation.x += deltaTime * 0.1
         mesh.rotation.y += deltaTime * 0.12
+
+        if(mesh == octahedron)
+        {
+            // Increase or decrease the size of the octahedron
+            mesh.scale.x += deltaTime * spikeDirection * 0.05;
+            mesh.scale.y += deltaTime * spikeDirection * 0.05;
+            mesh.scale.z += deltaTime * spikeDirection * 0.05;
+
+            // If we've reached the max or min size, switch direction
+            if (mesh.scale.z > maxSpikeSize || mesh.scale.z < minSpikeSize) {
+                spikeDirection *= -1;
+            }
+        }
+
+        if(mesh == cylinder)
+        {
+            // Increase or decrease the size of the octahedron
+            mesh.scale.y += deltaTime * spikeDirection * 0.05;
+
+            // If we've reached the max or min size, switch direction
+            if (mesh.scale.z > maxSpikeSize || mesh.scale.z < minSpikeSize) {
+                spikeDirection *= -1;
+            }
+        }
+    }
+
+    //Check if modelMotorcycle is defined and apply rotation
+    if (modelMotorcycle) {
+        modelMotorcycle.rotation.y += deltaTime * 0.1; // adjust rotation speed here
     }
 
     // Render
@@ -257,14 +347,14 @@ tick()
 
 // NAVBAR SANDWHICH STUFF
 
-document.querySelector('.menu a').addEventListener('click', function (e) {
+document.querySelector('.menuicon a').addEventListener('click', function (e) {
     e.preventDefault();
     document.getElementById('sidenav').classList.toggle('show');
     document.getElementById('overlay').classList.toggle('show');
 });
 
 
-$(document).ready(function() {
+$(function() {
     // Smooth scroll to section when navigation link is clicked
     $("#sidenav a").on("click", function(event) {
         if (this.hash !== "") {
