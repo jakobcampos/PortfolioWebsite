@@ -66,14 +66,8 @@ const materialCylinder = new THREE.MeshBasicMaterial({
 })
 
 const materialMotorcycle = new THREE.MeshBasicMaterial({ 
-    opacity: .05,
+    opacity: .15,
     color: 0xff5349, 
-    wireframe: true
-});
-
-const materialPorsche= new THREE.MeshBasicMaterial({ 
-    opacity: .03,
-    color: 0xb18cfe, 
     wireframe: true
 });
 
