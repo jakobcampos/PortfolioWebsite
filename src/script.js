@@ -3,33 +3,10 @@ import * as THREE from 'three'
 import * as dat from 'lil-gui'
 import gsap from 'gsap'
 import $ from 'jquery';
-// Import OBJLoader
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
+THREE.ColorManagement.enabled = false;
 
-THREE.ColorManagement.enabled = false
-
-/**
- * Debug
- */
-
-// const gui = new dat.GUI()
-//
-//  const parameters = {
-//      materialColor: '#ffeded'
-//  }
-//
-//  gui
-//      .addColor(parameters, 'materialColor')
-//      .onChange(() =>
-//      {
-//          material.color.set(parameters.materialColor)
-//          particlesMaterial.color.set(parameters.materialColor)
-//     })
-//
-/**
- * Base
- */
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -105,8 +82,8 @@ objLoader.load(
         object.rotation.y = Math.PI  + 90;
 
         // Position
-        object.position.x = 2.5;
-        object.position.y = - objectsDistance * 1 - 1.5;
+        object.position.x = 2.75;
+        object.position.y = - objectsDistance * 1 - 1.25;
 
         modelMotorcycle = object;
     },
@@ -365,3 +342,24 @@ $(function() {
         }
     });
 });
+
+
+let slideIndex = 0;
+const slides = document.querySelectorAll('.project-slide');
+
+function shiftSlide(direction) {
+  slideIndex = Math.max(0, Math.min(slideIndex + direction, slides.length - 1));
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.transform = `translateY(-${slideIndex * 100}%)`;
+  }
+}
+
+// Select the buttons
+const upButton = document.querySelector('.carousel-control.left');
+const downButton = document.querySelector('.carousel-control.right');
+
+// Add event listeners
+upButton.addEventListener('click', function() { shiftSlide(-1); });
+downButton.addEventListener('click', function() { shiftSlide(1); });
+
+

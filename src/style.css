@@ -21,7 +21,6 @@ body, html
     outline: none;
 }
 
-
 .menuicon {
     position: fixed;
     top: 24px;
@@ -68,10 +67,12 @@ body, html
 
 p {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     font-size: 2vmin;
+    padding-top: 1%;
     padding-right: 10%;
+    max-width: 50%;
 }
 
 section
@@ -101,6 +102,66 @@ section
 section:nth-child(odd) {
     text-align: end;
     justify-content: flex-end;
+}
+
+section#aboutme {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+}
+
+section#projects {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: end;
+}
+
+.skills-container {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.skills {
+    padding-top: 5%;
+}
+
+.js-icon {
+  color: #f7df1e; /* JavaScript color */
+}
+
+.html-icon {
+  color: #e34f26; /* HTML5 color */
+}
+
+.css-icon {
+  color: #264de4; /* CSS3 color */
+}
+
+.react-icon {
+  color: #61dafb; /* React color */
+}
+
+.vue-icon {
+  color: #42b883; /* Vue.js color */
+}
+
+.sql-icon {
+  color: #e38b00; /* SQL color (generic database icon, no official color) */
+}
+
+.docker-icon {
+  color: #2496ed; /* Docker color */
+}
+
+.aws-icon {
+  color: #232f3e; /* AWS color */
+}
+
+.git-icon {
+  color: #f34f29; /* Git color */
 }
 
 /* section#projects { */
