@@ -195,21 +195,22 @@ section#projects {
 }
 
 #prevBtn, #nextBtn {
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: transparent;
     border: none;
     color: #000;  /* Arrow color */
-    text-shadow: 2px 2px #fff;  /* Outline around the arrow */
-    font-size: 2em;  /* Size of the arrows */
+    font-size: 35px;  /* Size of the arrows */
+    opacity: .5;
 }
 
 #prevBtn {
-    left: 10px;
+    left: 40%;
 }
 
 #nextBtn {
-    right: 10px;
+    right: 50px;
 }
 
 
