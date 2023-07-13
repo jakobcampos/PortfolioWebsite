@@ -343,23 +343,29 @@ $(function() {
     });
 });
 
-
 let slideIndex = 0;
-const slides = document.querySelectorAll('.project-slide');
+const slides = document.querySelectorAll('.carousel-slide');
 
-function shiftSlide(direction) {
-  slideIndex = Math.max(0, Math.min(slideIndex + direction, slides.length - 1));
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.transform = `translateY(-${slideIndex * 100}%)`;
-  }
+function showSlide(n) {
+    if (n > slides.length - 1) slideIndex = 0;
+    if (n < 0) slideIndex = slides.length - 1;
+    slides.forEach((slide, index) => {
+        slide.style.display = "none";
+        if (index === slideIndex) {
+            slide.style.display = "flex";
+        }
+    });
 }
 
-// Select the buttons
-const upButton = document.querySelector('.carousel-control.left');
-const downButton = document.querySelector('.carousel-control.right');
+document.querySelector('#prevBtn').addEventListener('click', () => {
+    showSlide(--slideIndex);
+});
 
-// Add event listeners
-upButton.addEventListener('click', function() { shiftSlide(-1); });
-downButton.addEventListener('click', function() { shiftSlide(1); });
+document.querySelector('#nextBtn').addEventListener('click', () => {
+    showSlide(++slideIndex);
+});
+
+showSlide(slideIndex); // Show the first slide initially
+
 
 
