@@ -10,8 +10,11 @@
 
 body, html
 {
-    background: #050505;
+    background: #000000;
+    /* background: linear-gradient(#000000, #312d2d, #000000); */
 }
+
+/* nice red color i like #a54242*/
 
 .webgl
 {
@@ -84,8 +87,8 @@ section
     position: relative;
     text-transform: uppercase;
     font-size: 7vmin;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .hidden {
@@ -107,6 +110,77 @@ section:nth-child(odd) {
 /* About Me Section */
 
 section#aboutme {
+    margin-top: 25%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+}
+
+section#projects {
+    margin-top: 25%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+}
+
+section#contact {
+    margin-top: 25%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+}
+
+/* Section Backgrounds */
+
+.about-me-background {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background: radial-gradient(#a54242, #bf5454);
+    border-radius: 20px;
+    padding: 10%;
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box; 
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+}
+
+.projects-background {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background: radial-gradient(#d8d8d8, #ffffff);
+    border-radius: 20px;
+    padding: 10%;
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box; 
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+}
+
+.projects-background > h2{
+    color: #000000;
+}
+
+.contact-background {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background: radial-gradient(#3571a4, #4779a1);
+    border-radius: 20px;
+    padding: 10%;
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box; 
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -139,9 +213,6 @@ section#aboutme {
   color: #61dafb; /* React color */
 }
 
-.vue-icon {
-  color: #42b883; /* Vue.js color */
-}
 
 .sql-icon {
   color: #e38b00; /* SQL color (generic database icon, no official color) */
@@ -158,68 +229,6 @@ section#aboutme {
 .git-icon {
   color: #f34f29; /* Git color */
 }
-
-/* Projects Section */
-
-section#projects {
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: end;
-}
-
-.carousel-container {
-    width: 50%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    outline: 1px solid green;
-}
-
-.carousel-slide {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    height: 80%;
-    margin: 10px;
-    padding: 10px;
-    outline: 1px solid yellow;
-}
-
-.carousel-slide.active {
-    display: flex;
-}
-
-#prevBtn, #nextBtn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    color: #000;  /* Arrow color */
-    font-size: 35px;  /* Size of the arrows */
-    opacity: .5;
-}
-
-#prevBtn {
-    left: 40%;
-}
-
-#nextBtn {
-    right: 50px;
-}
-
-
-img {
-    max-width: 100%;
-    height: auto;
-    outline: 1px solid red;
-}
-
 
 /* NAVBAR SANDWHICH STUFF */
 

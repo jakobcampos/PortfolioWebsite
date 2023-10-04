@@ -1,9 +1,6 @@
 //script.js
 import * as THREE from 'three'
-import * as dat from 'lil-gui'
-import gsap from 'gsap'
 import $ from 'jquery';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
 THREE.ColorManagement.enabled = false;
 
@@ -32,70 +29,11 @@ const materialSmallCube = new THREE.MeshBasicMaterial({
     wireframe: true
 })
 
-const materialOctahedron = new THREE.MeshBasicMaterial({
-    color: 0xb18cfe,
-    wireframe: true
-})
-
-const materialCylinder = new THREE.MeshBasicMaterial({
-    color: 0x74a7fe,
-    wireframe: true
-})
-
-const materialMotorcycle = new THREE.MeshBasicMaterial({ 
-    opacity: .15,
-    color: 0xff5349, 
-    wireframe: true
-});
-
-materialCylinder.transparent = true;
-
 const group = new THREE.Group()
 scene.add(group)
 
 // Objects
 const objectsDistance = 15
-
-const objLoader = new OBJLoader();
-
-let modelMotorcycle;
-
-objLoader.load(
-    'models/model.obj',
-    function ( object ) {
-        // Assign the new material
-        object.traverse(function (child) {
-            if (child instanceof THREE.Mesh) {
-                child.material = materialMotorcycle;
-                child.material.transparent = true;
-            }
-        });
-
-        group.add(object);
-
-        object.transparent = true;
-
-        // Scale
-        object.scale.set(.25, .25, .25);
-
-        // Rotation
-        object.rotation.y = Math.PI  + 90;
-
-        // Position
-        object.position.x = 2.75;
-        object.position.y = - objectsDistance * 1 - 1.25;
-
-        modelMotorcycle = object;
-    },
-    function ( xhr ) {
-    // This function is called when the loading process is ongoing
-    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-    },
-    function ( error ) {
-    // This function is called if an error occurs
-    console.error( 'An error happened', error );
-    }
-);
 
 const sphere = new THREE.Mesh(
     new THREE.OctahedronGeometry(.3, 5),
@@ -109,25 +47,11 @@ const torus = new THREE.Mesh(
     new THREE.TorusGeometry(2, 0.4, 16, 60),
     materialTorus
 )
-const octahedron = new THREE.Mesh(
-    new THREE.OctahedronGeometry(1.5, 2),
-    materialOctahedron
-)
-const cylinder = new THREE.Mesh(
-    new THREE.CylinderGeometry(1.25, 1.25, 3, 20, 1),
-    materialCylinder
-)
 
 // Title Objects
 group.add(sphere)
 group.add(smallCube)
 group.add(torus)
-
-// My Project Object
-group.add(octahedron)
-
-// Conact Me Object
-group.add(cylinder)
 
 // Sphere Position
 sphere.position.x = 1
@@ -139,20 +63,9 @@ smallCube.position.x = -4.2
 smallCube.position.y = -1
 smallCube.position.z = -3
 
-// Octahedron Position
-octahedron.position.x = - 3
-
-// Cylinder Position
-cylinder.position.x = 3
-
 // Object Scroll Position
 torus.position.y = - objectsDistance * 0
-octahedron.position.y = - objectsDistance * 2
-cylinder.position.y = - objectsDistance * 3
-
-//scene.add(mesh1, mesh2, mesh3)
-
-const sectionMeshes = [ sphere, smallCube, torus, octahedron, cylinder ]
+const sectionMeshes = [ sphere, smallCube, torus ]
 
 /**
  * Sizes
@@ -250,18 +163,12 @@ window.addEventListener('mousemove', (event) =>
  */
 const clock = new THREE.Clock()
 let previousTime = 0
-let spikeDirection = 1;
-let maxSpikeSize = 1.25;
-let minSpikeSize = .5;
-const maxDeltaTime = 1 / 60; // Corresponds to 30 FPS
 
-const tick = () => {
-    const elapsedTime = clock.getElapsedTime();
-    let deltaTime = elapsedTime - previousTime;
-    previousTime = elapsedTime;
-
-    // Clamp deltaTime
-    deltaTime = Math.min(deltaTime, maxDeltaTime);
+const tick = () =>
+{
+    const elapsedTime = clock.getElapsedTime()
+    const deltaTime = elapsedTime - previousTime
+    previousTime = elapsedTime
 
     // Animate camera
     camera.position.y = - scrollY / sizes.height * objectsDistance
@@ -276,35 +183,6 @@ const tick = () => {
     {
         mesh.rotation.x += deltaTime * 0.1
         mesh.rotation.y += deltaTime * 0.12
-
-        if(mesh == octahedron)
-        {
-            // Increase or decrease the size of the octahedron
-            mesh.scale.x += deltaTime * spikeDirection * 0.05;
-            mesh.scale.y += deltaTime * spikeDirection * 0.05;
-            mesh.scale.z += deltaTime * spikeDirection * 0.05;
-
-            // If we've reached the max or min size, switch direction
-            if (mesh.scale.z > maxSpikeSize || mesh.scale.z < minSpikeSize) {
-                spikeDirection *= -1;
-            }
-        }
-
-        if(mesh == cylinder)
-        {
-            // Increase or decrease the size of the octahedron
-            mesh.scale.y += deltaTime * spikeDirection * 0.05;
-
-            // If we've reached the max or min size, switch direction
-            if (mesh.scale.z > maxSpikeSize || mesh.scale.z < minSpikeSize) {
-                spikeDirection *= -1;
-            }
-        }
-    }
-
-    //Check if modelMotorcycle is defined and apply rotation
-    if (modelMotorcycle) {
-        modelMotorcycle.rotation.y += deltaTime * 0.1; // adjust rotation speed here
     }
 
     // Render
@@ -316,56 +194,73 @@ const tick = () => {
 
 tick()
 
-// NAVBAR SANDWHICH STUFF
-
-document.querySelector('.menuicon a').addEventListener('click', function (e) {
-    e.preventDefault();
-    document.getElementById('sidenav').classList.toggle('show');
-    document.getElementById('overlay').classList.toggle('show');
-});
-
-
+// Scrolling 
 $(function() {
-    // Smooth scroll to section when navigation link is clicked
-    $("#sidenav a").on("click", function(event) {
-        if (this.hash !== "") {
-            event.preventDefault();
-
-            const hash = this.hash;
-
-            $("html, body").animate(
-                {
-                    scrollTop: $(hash).offset().top
-                },
-                800
-            );
-        }
+    
+    // Navbar & Sandwich functionality
+    document.querySelector('.menuicon a').addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('sidenav').classList.toggle('show');
+        document.getElementById('overlay').classList.toggle('show');
     });
-});
 
-let slideIndex = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-
-function showSlide(n) {
-    if (n > slides.length - 1) slideIndex = 0;
-    if (n < 0) slideIndex = slides.length - 1;
-    slides.forEach((slide, index) => {
-        slide.style.display = "none";
-        if (index === slideIndex) {
-            slide.style.display = "flex";
-        }
+    $("#sidenav a").on("click", function (e) {
+        e.preventDefault();
+        const target = $(this).attr('href');
+        smoothScroll(target, 1500);
     });
-}
 
-document.querySelector('#prevBtn').addEventListener('click', () => {
-    showSlide(--slideIndex);
+    // Scrolling functionality
+    let isScrolling = false;
+    let currentSectionIndex = 0;
+    const sections = ['section', '#aboutme', '#projects', '#contact'];
+    let lastScrollTime = 0;
+    let allowScroll = true;
+
+    function smoothScroll(target) {
+        if(isScrolling) return;
+        
+        isScrolling = true;
+        $('html, body').stop().animate({ scrollTop: $(target).offset().top }, 1000, function() {
+            console.log("Scroll completed to:", target);
+            isScrolling = false;
+            lastScrollTime = new Date().getTime();
+        });
+    }
+
+    function scrollToSection() {
+        const target = sections[currentSectionIndex];
+        smoothScroll(target);
+    }
+
+    window.addEventListener('wheel', function (event) {
+        event.preventDefault();
+
+        if (!allowScroll) return;
+
+        const now = new Date().getTime();
+        
+        // If it's been less than 1100ms since the last scroll, do nothing
+        if (now - lastScrollTime < 300) {
+            return;
+        }
+        
+        lastScrollTime = now;
+        
+        if(isScrolling) return;
+        
+        if (event.deltaY > 0) {
+            currentSectionIndex = Math.min(currentSectionIndex + 1, sections.length - 1);
+        } else if (event.deltaY < 0) {
+            currentSectionIndex = Math.max(currentSectionIndex - 1, 0);
+        }
+
+        scrollToSection();
+
+        allowScroll = false;
+        setTimeout(() => {
+            allowScroll = true;
+        }, 600);
+
+    }, { passive: false });
 });
-
-document.querySelector('#nextBtn').addEventListener('click', () => {
-    showSlide(++slideIndex);
-});
-
-showSlide(slideIndex); // Show the first slide initially
-
-
-
