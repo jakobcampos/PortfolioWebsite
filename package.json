@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "gsap": "^3.12.1",
-    "jquery": "^3.7.0",
     "lil-gui": "^0.18.1",
     "three": "^0.157.0"
   }
