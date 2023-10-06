@@ -41,9 +41,8 @@ body, html
 }
 
 .social-icons {
-    padding-top: 24px;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     gap: 25px; /* Adjust this to change the spacing between your icons */
 }
 
@@ -56,8 +55,27 @@ body, html
     color: rgba(255, 237, 237, 0.7); /* this color is slightly darker */
 }
 
-.title-container {
-    margin-top: -72px;
+p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vmin;
+    padding-top: 1%;
+    padding-right: 10%;
+    max-width: 50%;
+}
+
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-transform: uppercase;
+    
+    font-size: 7vmin;
+}
+
+#title-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,123 +87,66 @@ body, html
     font-size: .5em;
 }
 
-p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2vmin;
-    padding-top: 1%;
-    padding-right: 10%;
-    max-width: 50%;
-}
-
-section
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: relative;
-    text-transform: uppercase;
+#about-me-section {
+    text-transform: lowercase;
     font-size: 7vmin;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding: 4rem;
 }
 
-.hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s;
+#projects-section {
+    text-transform: lowercase;
+    font-size: 7vmin;
+    padding: 4rem;
 }
 
-.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-section:nth-child(odd) {
-    text-align: end;
-    justify-content: flex-end;
-}
-
-/* About Me Section */
-
-section#aboutme {
-    margin-top: 25%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: start;
-}
-
-section#projects {
-    margin-top: 25%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: start;
-}
-
-section#contact {
-    margin-top: 25%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: start;
-}
-
-/* Section Backgrounds */
-
-.about-me-background {
-    margin-top: 2%;
-    margin-bottom: 2%;
-    background: radial-gradient(#a54242, #bf5454);
-    border-radius: 20px;
-    padding: 10%;
-    width: 100%;
-    height: 100%;
-
-    box-sizing: border-box; 
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: start;
-}
-
-.projects-background {
-    margin-top: 2%;
-    margin-bottom: 2%;
-    background: radial-gradient(#d8d8d8, #ffffff);
-    border-radius: 20px;
-    padding: 10%;
-    width: 100%;
-    height: 100%;
-
-    box-sizing: border-box; 
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: start;
-}
-
-.projects-background > h2{
+#projects-section h2 {
     color: #000000;
 }
 
-.contact-background {
-    margin-top: 2%;
-    margin-bottom: 2%;
-    background: radial-gradient(#3571a4, #4779a1);
-    border-radius: 20px;
-    padding: 10%;
-    width: 100%;
-    height: 100%;
+#contact-me-section {
+    text-transform: lowercase;
+    font-size: 7vmin;
+    padding: 4rem;
+}
 
-    box-sizing: border-box; 
-    display:flex;
+.about-me-container {
+    background: radial-gradient(rgba(165, 66, 66, 0.8), rgba(191, 84, 84, 0.8));
+    border-radius: 20px;
+    height: 85vh;
+    padding: 10%;
+
+
+    box-sizing: border-box;
+    display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: start;
+    align-items: start;
+}
+
+.projects-container {
+    background: radial-gradient(rgba(238, 233, 233, 0.8), rgba(255, 255, 255, 0.8));
+    border-radius: 40px;
+    height: 85vh;
+    padding: 10%;
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.contact-me-container {
+    background: radial-gradient(rgba(66, 73, 165, 0.8), rgba(84, 97, 191, 0.8));
+    border-radius: 20px;
+    height: 85vh;
+    padding: 10%;
+
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     align-items: start;
 }
 
@@ -274,4 +235,41 @@ section#contact {
 
 .show {
     display: block;
+}
+
+/* Common CSS for both sections */
+.section {
+    opacity: 1;
+    position: relative; /* Ensure the section is relatively positioned */
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+/* CSS for about-me-section */
+#about-me-section {
+    transform: translateX(-100%);
+}
+
+#about-me-section.show-section {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* CSS for projects-section */
+#projects-section {
+    transform: translateX(100%);
+}
+
+#projects-section.show-section {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* CSS for about-me-section */
+#contact-me-section {
+    transform: translateX(-100%);
+}
+
+#contact-me-section.show-section {
+    opacity: 1;
+    transform: translateX(0);
 }

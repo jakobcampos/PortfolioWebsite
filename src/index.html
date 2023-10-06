@@ -13,7 +13,6 @@
 <body>
   <canvas class="webgl"></canvas>
 
-
   <div class="menuicon">
     <a href="#"><i class="fas fa-bars"></i></a>
   </div>
@@ -26,68 +25,44 @@
     <a href="#contact">Contact</a>
   </div>
 
-  <section id="home" class="hidden">
-    <div class="social-icons">
-      <a href="https://github.com/jakobcampos" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://twitter.com/jakobdevs" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="https://instagram.com/jakobdevs" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://linkedin.com/in/jakobcampos" target="_blank"><i class="fab fa-linkedin"></i></a>
-    </div>
-    <div class="title-container">
-      <h1>Jakob Campos</h1>
-      <h6>Fullstack Developer</h6>
-    </div>
-  </section>
-
-  <section id="aboutme" class="hidden">
-    <div class="about-me-background">
-      <h2>About me</h2>
-      <p>
-        I'm a Fullstack Developer from Los Angeles, California.
-      </p>
-
-      <!-- <div id="skills">
-      <div class="skills-container">
-        <div class="skill">
-          <i class="fab fa-js-square js-icon" title="JavaScript"></i>
-        </div>
-        <div class="skill">
-          <i class="fab fa-html5 html-icon" title="HTML5"></i>
-        </div>
-        <div class="skill">
-          <i class="fab fa-css3-alt css-icon" title="CSS3"></i>
-        </div>
-        <div class="skill">
-          <i class="fab fa-react react-icon" title="React"></i>
-        </div>
-        <div class="skill">
-          <i class="fas fa-database sql-icon" title="SQL"></i>
-        </div>
-        <div class="skill">
-          <i class="fab fa-docker docker-icon" title="Docker"></i>
-        </div>
-        <div class="skill">
-          <i class="fab fa-aws aws-icon" title="AWS"></i>
-        </div>
-        <div class="skill">
-          <i class="fab fa-git git-icon" title="Git"></i>
-        </div>
+  <div id="fullpage"> <!-- Change class to id -->
+    <div class="section" id="home">
+      <div class="social-icons">
+        <a href="https://github.com/jakobcampos" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://twitter.com/jakobdevs" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com/jakobdevs" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/in/jakobcampos" target="_blank"><i class="fab fa-linkedin"></i></a>
       </div>
-    </div> -->
+      <div class="title-container">
+        <h1>Jakob Campos</h1>
+        <h6>Fullstack Developer</h6>
+      </div>
     </div>
-  </section>
 
-  <section id="projects" class="hidden">
-    <div class="projects-background">
-      <h2>My projects</h2>
-    </div>
-  </section>
+    <div class="section" id="about-me-section">
+      <div class="about-me-container">
+        <!-- Your Section 1 Content Here -->
+        <h2>About Me.</h2>
+        <p>I'm from California</p>
+      </div>
+    </div>    
 
-  <section id="contact" class="hidden">
-    <div class="contact-background">
-      <h2>Contact me</h2>
+    <div class="section" id="projects-section">
+      <div class="projects-container">
+        <!-- Your Section 1 Content Here -->
+        <h2>my projects.</h2>
+      </div>
     </div>
-  </section>
+
+    <div class="section" id="contact-me-section">
+      <div class="contact-me-container">
+        <!-- Your Section 1 Content Here -->
+        <h2>contact me.</h2>
+      </div>
+    </div>
+  </div>
+
+
   <script type="module" src="./script.js"></script>
 </body>
 

@@ -51,7 +51,7 @@ export class SceneSetup {
         this.smallCube.position.z = -3
 
         // Object Scroll Position
-        this.torus.position.y = - this.objectsDistance * 0
+        this.torus.position.y = - this.objectsDistance * 0;
 
         this.sectionMeshes = [this.sphere, this.smallCube, this.torus];
         this.group.add(this.sphere, this.smallCube, this.torus);
