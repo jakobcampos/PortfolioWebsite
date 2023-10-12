@@ -19,7 +19,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         licenseKey: 'SKLSJ-R0546-FHB77-L182H-AQWSO',
         autoScrolling: true,
         navigation: true,
-        easing: 'easeInOutCubic',
+        controlArrows: true, // arrows disabled
+        continuousVertical: true,
+        // loopTop: true,
+        // loopBottom: true,
     // other options...
     onLeave: function(origin, destination, direction) {
         // Remove the 'show-section' class from the section we are leaving
@@ -67,4 +70,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
             smoothScrollToElement(document.querySelector(target));
         });
     });
+
+    document.querySelectorAll('.fp-custom-arrow.left').forEach(a => {
+        a.addEventListener("click", function (e) {
+            e.preventDefault();
+            // Move to the previous section or slide
+            fullpage_api.moveSlideLeft(); // or fullpage_api.moveSlideLeft();
+        });
+    });
+
+    // Attach event listener for the "right" button
+    document.querySelectorAll('.fp-custom-arrow.right').forEach(a => {
+        a.addEventListener("click", function (e) {
+            e.preventDefault();
+            // Move to the next section or slide
+            fullpage_api.moveSlideRight(); // or fullpage_api.moveSlideRight();
+        });
+    });
+    
 });

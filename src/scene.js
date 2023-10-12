@@ -41,13 +41,13 @@ export class SceneSetup {
         this.torus = new THREE.Mesh(new THREE.TorusGeometry(2, 0.4, 16, 60), this.materialTorus);
         
         // Sphere Position
-        this.sphere.position.x = 1
-        this.sphere.position.y = 1
+        this.sphere.position.x = 1;
+        this.sphere.position.y = 1;
         this.sphere.position.z = 3;
 
         // Small Cube Position
-        this.smallCube.position.x = -4.2
-        this.smallCube.position.y = -1
+        this.smallCube.position.x = -3.8;
+        this.smallCube.position.y = -2.5;
         this.smallCube.position.z = -3
 
         // Object Scroll Position
