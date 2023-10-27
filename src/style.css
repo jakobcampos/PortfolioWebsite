@@ -11,7 +11,7 @@
 body, html
 {
     background: #000000;
-    /* background: linear-gradient(#000000, #312d2d, #000000); */
+    font-size: 62.5%;
 }
 
 /* nice red color i like #a54242*/
@@ -25,255 +25,39 @@ body, html
     pointer-events: none;
 }
 
-.fa, .fas, .far {
-    font-family: "Font Awesome 5 Free", "Font Awesome 5 Regular" !important;
+h1 {
+    text-transform: uppercase;
+    font-size: 17.2em;
+    line-height: 1.25;
 }
 
-.menuicon {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 4; /* Add a higher z-index value */
-}
-
-.menuicon a {
-    font-size: 24px;
-}
-
-.menuicon a:hover {
-    cursor: pointer;
-}
 
 .social-icons {
     display: flex;
     justify-content: end;
-    gap: 25px; /* Adjust this to change the spacing between your icons */
+    gap: 3.2em; /* Adjust this to change the spacing between your icons */
 }
 
 .social-icons a {
     transition: color 0.2s ease-in-out;
-    font-size: 24px; /* Adjust this value to increase or decrease the size of the icons */
+    font-size: 4.8em; /* Adjust this value to increase or decrease the size of the icons */
 }
 
 .social-icons a:hover i {
     color: rgba(255, 237, 237, 0.7); /* this color is slightly darker */
 }
 
-p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2vmin;
-    padding-top: 1%;
-    padding-right: 10%;
-    max-width: 50%;
-}
-
-#home {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    text-transform: uppercase;
-    
-    font-size: 7vmin;
-}
-
-#title-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-.title-container h6 {
-    font-size: .5em;
-}
-
-#about-me-section {
-    text-transform: lowercase;
-    font-size: 7vmin;
-    padding: 4rem;
-}
-
-#projects-section {
-    text-transform: lowercase;
-    font-size: 7vmin;
-    padding: 4rem;
-}
-
-#projects-section h2 {
-    color: #ffffff;
-}
-
-#contact-me-section {
-    text-transform: lowercase;
-    font-size: 7vmin;
-    padding: 4rem;
-}
-
-.about-me-container {
-    background: radial-gradient(rgba(165, 66, 66, 0.8), rgba(191, 84, 84, 0.8));
-    border-radius: 20px;
-    height: 85vh;
-    padding: 10%;
-
-
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-}
-
-.projects-container {
-    background: radial-gradient(rgba(65, 196, 65, 0.8), rgba(44, 187, 44, 0.8));
-    border-radius: 40px;
-    height: 85vh;
-    padding: 5%;
-
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
-}
-
-.contact-me-container {
-    background: radial-gradient(rgba(66, 73, 165, 0.8), rgba(84, 97, 191, 0.8));
-    border-radius: 20px;
-    height: 85vh;
-    padding: 10%;
-
-
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-}
-
-.skills-container {
-  display: flex;
-  gap: 1em;
-  flex-wrap: wrap;
-}
-
-.skills {
-    padding-top: 5%;
-}
-
-.js-icon {
-  color: #f7df1e; /* JavaScript color */
-}
-
-.html-icon {
-  color: #e34f26; /* HTML5 color */
-}
-
-.css-icon {
-  color: #264de4; /* CSS3 color */
-}
-
-.react-icon {
-  color: #61dafb; /* React color */
-}
-
-
-.sql-icon {
-  color: #e38b00; /* SQL color (generic database icon, no official color) */
-}
-
-.docker-icon {
-  color: #2496ed; /* Docker color */
-}
-
-.aws-icon {
-  color: #232f3e; /* AWS color */
-}
-
-.git-icon {
-  color: #f34f29; /* Git color */
-}
-
-/* NAVBAR SANDWHICH STUFF */
-
-.overlay {
-    display: none;
-    position: fixed;
+#title-section {
+    position:relative;
     width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-}
-
-.sidenav {
-    display: none;
     height: 100vh;
-    width: 400px;
-    position: fixed;
-    z-index: 3;
-    top: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.564);
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #9a9a9a;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.show {
-    display: block;
-}
-
-/* Common CSS for both sections */
-.section {
-    opacity: 1;
-    position: relative; /* Ensure the section is relatively positioned */
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-}
-
-/* CSS for about-me-section */
-#about-me-section {
-    transform: translateX(-100%);
-}
-
-#about-me-section.show-section {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* CSS for projects-section */
-#projects-section {
-    transform: translateX(100%);
-}
-
-#projects-section.show-section {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* CSS for about-me-section */
-#contact-me-section {
-    transform: translateX(-100%);
-}
-
-#contact-me-section.show-section {
-    opacity: 1;
-    transform: translateX(0);
+#title-section h6 {
+    text-transform: uppercase;
+    font-size: 4.8em;
 }
